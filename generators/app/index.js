@@ -35,7 +35,7 @@ module.exports = class extends Generator {
 
         this.fs.copyTpl(
             `${this.templatePath()}/*tf`,
-            this.destinationRoot()
+            this.destinationRoot(this.answer.name)
         );
     }
 };
