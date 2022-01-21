@@ -1,4 +1,5 @@
 const Generator = require('yeoman-generator');
+const path = require("path");
 yosay = require('yosay');
 
 module.exports = class extends Generator {
@@ -30,8 +31,13 @@ module.exports = class extends Generator {
     }
 
     writing() {
-        this.log("The Project name is: ", this.answer.name);
-        this.log("The description of project is: ", this.answer.description);
+        this.log("Hold Tight!!! We are generating a scaffold project for ", this.answer.name);
+        this.destinationRoot(this.answer.name);
+
+        this.fs.copyTpl(
+            `${this.templatePath()}/*tf`,
+            this.destinationRoot()
+        );
     }
 };
 
