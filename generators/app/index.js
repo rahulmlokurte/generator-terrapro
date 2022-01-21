@@ -61,11 +61,11 @@ module.exports = class extends Generator {
                     choices: [
                         {
                             name: 'nodejs',
-                            value: 'nodejs'
+                                value: 'nodejs14.x'
                         },
                         {
                             name: 'python',
-                            value: 'python'
+                            value: 'python3.8'
                         }
                     ]
                 }
