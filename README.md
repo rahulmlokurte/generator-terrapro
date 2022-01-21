@@ -17,6 +17,12 @@ To create a pre-configured Terraform Project, run the following command:
 yo terrapro
 ```
 
+### AWS Service Support
+
+It currently supports the following AWS services:
+
+- Lambda Function
+
 ### Contributing to Terrapro
 
 Found a bug? Want to contribute? Feel free to open an issue or create a pull request on [GitHub](https://github.com/rahulmlokurte/generator-terrapro)
