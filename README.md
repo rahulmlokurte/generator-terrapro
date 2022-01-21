@@ -6,13 +6,15 @@ This package is a Terraform scaffolding tool for generating a pre-configured Ter
 
 - [nodejs](https://nodejs.org/en/download/)
 - [terraform](https://learn.hashicorp.com/terraform/getting-started/install#installing-terraform)
+- `npm install -g yo`
+- `npm install -g generator-terrapro`
 
 ### Usage
 
 To create a pre-configured Terraform Project, run the following command:
 
 ```shell
-npx -p yo -p generator-terrapro -c 'yo terrapro'
+yo terrapro
 ```
 
 ### Contributing to Terrapro
