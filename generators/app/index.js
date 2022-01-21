@@ -26,13 +26,42 @@ module.exports = class extends Generator {
                 name: 'description',
                 message: 'What is the description of your project?',
                 default: 'A Terraform project'
-            }
-        ]);
+            },
+            {
+                type: 'list',
+                name: 'aws_service',
+                message: 'Which AWS service do you want to use?',
+                choices: [
+                    {
+                        name: 'AWS-lambda',
+                        value: 'aws-lambda'
+                    }
+                ]
+            }])
+
+        if (this.answer.aws_service === 'aws-lambda') {
+            this.lambda = await this.prompt(
+                {
+                    type: 'input',
+                    name: 'function_name',
+                    message: 'What is the name of the lambda-function?',
+                    default: this.appname
+                }
+            )
+        }
     }
 
     writing() {
         this.log("Hold Tight!!! We are generating a scaffold project for ", this.answer.name);
 
+
+        if (this.answer.aws_service === 'aws-lambda') {
+            this.fs.copyTpl(
+                `${this.templatePath()}/modules/aws-lambda/*tf`,
+                this.destinationPath(`${this.answer.name}/modules/aws-lambda/`),
+                { lambda_function_name: this.lambda.function_name }
+            )
+        }
         this.fs.copyTpl(
             `${this.templatePath()}/*tf`,
             this.destinationRoot(this.answer.name)
