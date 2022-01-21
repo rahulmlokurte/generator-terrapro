@@ -37,17 +37,39 @@ module.exports = class extends Generator {
                         value: 'aws-lambda'
                     }
                 ]
-            }])
+            }
+        ])
 
         if (this.answer.aws_service === 'aws-lambda') {
-            this.lambda = await this.prompt(
+            this.lambda = await this.prompt([
                 {
                     type: 'input',
                     name: 'function_name',
                     message: 'What is the name of the lambda-function?',
                     default: this.appname
+                },
+                {
+                    type: 'input',
+                    name: 'handler_name',
+                    message: 'What is the name of the lambda-handler?',
+                    default: this.appname
+                },
+                {
+                    type: 'list',
+                    name: 'runtime',
+                    message: 'What is the name of the lambda-runtime?',
+                    choices: [
+                        {
+                            name: 'nodejs',
+                            value: 'nodejs'
+                        },
+                        {
+                            name: 'python',
+                            value: 'python'
+                        }
+                    ]
                 }
-            )
+            ])
         }
     }
 
@@ -59,7 +81,11 @@ module.exports = class extends Generator {
             this.fs.copyTpl(
                 `${this.templatePath()}/modules/aws-lambda/*tf`,
                 this.destinationPath(`${this.answer.name}/modules/aws-lambda/`),
-                { lambda_function_name: this.lambda.function_name }
+                {
+                    lambda_function_name: this.lambda.function_name,
+                    lambda_handler: this.lambda.handler_name,
+                    lambda_runtime: this.lambda.runtime
+                }
             )
         }
         this.fs.copyTpl(
