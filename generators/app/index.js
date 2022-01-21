@@ -32,7 +32,6 @@ module.exports = class extends Generator {
 
     writing() {
         this.log("Hold Tight!!! We are generating a scaffold project for ", this.answer.name);
-        this.destinationRoot(this.answer.name);
 
         this.fs.copyTpl(
             `${this.templatePath()}/*tf`,
